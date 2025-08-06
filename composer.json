@@ -1,0 +1,6 @@
+{
+    "name": "carlo/estudos_php",
+    "require": {
+        "rain/raintpl": ">=3.0.0"
+    }
+}
