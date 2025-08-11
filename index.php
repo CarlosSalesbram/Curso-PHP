@@ -1,31 +1,20 @@
-<?php
+<?php 
 
-// include
-require "library/Rain/autoload.php";
+require_once("vendor/autoload.php");
 
-// namespace
-use Rain\Tpl;
+$app = new \Slim\Slim();
 
-// config
-$config = array(
-    "tpl_dir"       => "tpl/",
-    "cache_dir"     => "cache/",
-    "debug"         => false, // set to false to improve the speed
-);
+$app->config('debug', true);
 
-Tpl::configure( $config );
+$app->get('/', function() {
+    
+	$sql = new Hcode\DB\Sql();
 
-// create the Tpl object
-$tpl = new Tpl;
+	$results = $sql->select("SELECT * FROM tb_users");
 
-// assign a variable
-// $tpl->assign( "name", "Obi Wan Kenoby" );
+	echo json_encode($results);
+});
 
-// // assign an array
-// $tpl->assign( "week", array( "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ) );
+$app->run();
 
-// draw the template
-$tpl->draw("index");
-
-
-?>
+ ?>
